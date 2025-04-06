@@ -54,7 +54,7 @@ https://todo-project-uakq.onrender.com/
 5. **Running with Docker**
 -docker-compose up --build
 
-##This command builds the Docker image and starts the following services:
+## This command builds the Docker image and starts the following services:
 web: Runs the Django app.
 db: Runs the PostgreSQL database.
 
