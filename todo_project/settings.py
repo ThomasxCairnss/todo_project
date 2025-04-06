@@ -14,7 +14,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-cn=sw%39qz_vls80(kqdd
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # ALLOWED_HOSTS can be a comma-separated list in the environment variable, or empty for development
-ALLOWED_HOSTS = ['todo-project-uakq.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'todo-project-uakq.onrender.com']
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -57,12 +58,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'todo_project.wsgi.application'
 
-# Database configuration: uses DATABASE_URL if set, otherwise defaults to local Docker settings.
+
+if os.environ.get('RENDER'):
+    # Running on Render – use the environment's DATABASE_URL
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+else:
+    # Local development: default to local PostgreSQL settings
+    DATABASE_URL = 'postgres://todo_user:your_password@localhost:5432/todo_db'
+
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL', 'postgres://todo_user:your_password@db:5432/todo_db')
     )
 }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

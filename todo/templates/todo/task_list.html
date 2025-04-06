@@ -5,7 +5,6 @@
 {% block content %}
 <h1>Task List</h1>
 
-<!-- Sorting Section: Only Sort by Due Date -->
 <div style="margin-bottom: 20px; padding: 10px; background-color: #f0f8ff; border: 1px solid #007acc; border-radius: 5px;">
   <form method="get" action="{% url 'task_list' %}" style="display: flex; align-items: center; gap: 15px;">
     <div>
@@ -20,7 +19,6 @@
   </form>
 </div>
 
-<!-- Task List Section -->
 <div style="background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 5px; padding: 15px;">
   <ul style="list-style-type: none; padding: 0;">
     {% for task in tasks %}

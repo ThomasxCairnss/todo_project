@@ -6,7 +6,6 @@
 {% block content %}
 <h1>Dashboard</h1>
 <div class="dashboard-container">
-  <!-- Left Column: Dashboard Summary -->
   <div class="dashboard-summary" style="padding-right: 20px;">
     <p><strong>Total Tasks:</strong> {{ total_tasks }}</p>
     <p><strong>Completed Tasks:</strong> {{ completed_tasks }}</p>
@@ -20,14 +19,12 @@
     </ul>
   </div>
   
-  <!-- Right Column: Pie Chart -->
   <div class="dashboard-chart" style="border-left: 1px solid #ccc; padding-left: 20px;">
     <h2>Task Completion</h2>
 	<canvas id="taskPieChart" style="height:300px;"></canvas>
   </div>
 </div>
 
-<!-- Load Chart.js from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -14,7 +14,6 @@ class Task(models.Model):
     description = models.TextField()
     due_date = models.DateField()
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
-    # New fields:
     category = models.CharField(max_length=100, null=True, blank=True, help_text="E.g., Work, Personal, Errands")
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='Medium')
     
