@@ -13,7 +13,7 @@ This Django-based application is a to‑do list manager that lets users create, 
 - *(Optional)* Docker & docker-compose for a containerized setup
 
 ### Running Without Docker
-
+'''
 1. **Clone the Repository:**
    
    git clone https://github.com/your-username/todo_project.git
