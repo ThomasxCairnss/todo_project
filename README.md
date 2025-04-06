@@ -44,9 +44,6 @@ This Django-based application is a to‑do list manager that lets users create, 
    python manage.py migrate
    ```
 
-5. **Access the Application:**  
-   Open your browser and navigate to [http://localhost:8000](http://localhost:8000).
-
 ### Running With Docker
 
 1. **Build and Start the Containers:**
