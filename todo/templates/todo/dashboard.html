@@ -5,9 +5,9 @@
 
 {% block content %}
 <h1>Dashboard</h1>
-<div style="display: flex; flex-wrap: wrap;">
+<div style="display: flex; align-items: flex-start; gap: 20px; margin-top: 20px;">
   <!-- Left Column: Dashboard Summary -->
-  <div style="flex: 1; min-width: 300px; padding-right: 20px;">
+  <div style="flex: 1; padding: 10px; background-color: #f0f8ff; border: 1px solid #007acc; border-radius: 5px;">
     <p><strong>Total Tasks:</strong> {{ total_tasks }}</p>
     <p><strong>Completed Tasks:</strong> {{ completed_tasks }}</p>
     <p><strong>Pending Tasks:</strong> {{ pending_tasks }}</p>
@@ -21,16 +21,24 @@
   </div>
   
   <!-- Right Column: Pie Chart -->
-  <div style="flex: 1; min-width: 300px; border-left: 1px solid #ccc; padding-left: 20px;">
+  <div style="flex: 1; padding: 10px; background-color: #fff; border: 1px solid #ccc; border-radius: 5px; display: flex; flex-direction: column; align-items: center;">
     <h2>Task Completion</h2>
-    <canvas id="taskPieChart" style="width: 100%; height: 300px;"></canvas>
+    <!-- Chart container with fixed dimensions -->
+    <div style="width: 300px; height: 300px; position: relative;">
+      <canvas id="taskPieChart" style="position: absolute; top: 0; left: 0; width: 300px; height: 300px;"></canvas>
+    </div>
   </div>
 </div>
 
-<!-- Load Chart.js from CDN -->
+<!-- Load Chart.js and the Data Labels Plugin from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Register the Chart.js Data Labels plugin
+    Chart.register(ChartDataLabels);
+    
     var ctx = document.getElementById('taskPieChart').getContext('2d');
     var taskPieChart = new Chart(ctx, {
         type: 'pie',
@@ -38,12 +46,38 @@ document.addEventListener('DOMContentLoaded', function() {
             labels: ['Completed', 'Pending'],
             datasets: [{
                 data: [{{ completed_tasks }}, {{ pending_tasks }}],
-                backgroundColor: ['green', 'red'],
+                backgroundColor: ['green', 'red']
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                // Configure data labels to display the count on each slice
+                datalabels: {
+                    color: 'white',
+                    font: {
+                        weight: 'bold',
+                        size: 16
+                    },
+                    formatter: function(value, context) {
+                        return value;
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.label || '';
+                            var value = context.raw || 0;
+                            return label + ': ' + value;
+                        }
+                    }
+                }
+            }
         }
     });
 });
