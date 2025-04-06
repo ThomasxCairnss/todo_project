@@ -14,8 +14,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the rest of the project files
 COPY . .
 
-# Expose port 8000 (Render will override this if $PORT is set)
+# Expose port 8000 (Render will set $PORT at runtime)
 EXPOSE 8000
 
-# Run migrations and start the server with Gunicorn, binding to the port specified by $PORT or defaulting to 8000
+# Run migrations and start the server with Gunicorn, binding to $PORT or defaulting to 8000
 CMD ["sh", "-c", "python manage.py migrate && gunicorn todo_project.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
