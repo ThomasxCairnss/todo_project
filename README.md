@@ -67,4 +67,3 @@ This Django-based application is a to‑do list manager that lets users create, 
   - **Modular Architecture:** The application is organized into separate modules for task management, calendar integration, and dashboard visualizations, improving maintainability.
   - **Enhanced User Experience:** Integrating Chart.js and FullCalendar provides interactive visualizations and an intuitive UI.
   - **Easy Deployment:** The project is structured to facilitate quick deployment with clear configurations for production environments.
-```
