@@ -1,0 +1,11 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}My Points{% endblock %}
+
+{% block content %}
+<h1>My Points</h1>
+<div style="background-color: #f0f8ff; border: 1px solid #007acc; padding: 20px; border-radius: 5px;">
+    <p><strong>Weekly Points:</strong> {{ weekly_points }}</p>
+    <p><strong>Overall Points:</strong> {{ overall_points }}</p>
+</div>
+{% endblock %}

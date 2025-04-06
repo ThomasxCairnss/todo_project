@@ -1,14 +1,69 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Task
 import json
+from django.contrib.auth.models import User
 from .forms import TaskForm
 import pandas as pd
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
+def register_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken.")
+        else:
+            user = User.objects.create_user(username=username, password=password)
+            user.save()
+
+            
+            login(request, user)
+            messages.success(request, "Registration successful.")
+            return redirect("dashboard")
+
+    return render(request, "todo/register.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect("login")
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("dashboard")  
+        else:
+            messages.error(request, "Invalid username or password")
+
+    return render(request, "todo/login.html")
+
+@login_required
+def points_view(request):
+    profile = request.user.profile
+    context = {
+        'weekly_points': profile.weekly_points,
+        'overall_points': profile.overall_points,
+    }
+    return render(request, 'todo/points.html', context)
 def task_complete(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    task.status = "Completed"
-    task.save()
+    if task.status != "Completed":
+        task.status = "Completed"
+        task.save()
+
+        if request.user.is_authenticated and not task.points_awarded:
+            request.user.profile.add_points(100)
+            task.points_awarded = True
+            task.save()
+
     return redirect('task_list')
 
 def calendar_view(request):

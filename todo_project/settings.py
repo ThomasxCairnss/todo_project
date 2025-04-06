@@ -73,6 +73,8 @@ DATABASES = {
 }
 
 
+LOGIN_URL = '/login/'
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
