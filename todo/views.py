@@ -31,39 +31,8 @@ def calendar_view(request):
     return render(request, 'todo/calendar.html', context)
 
 def task_list(request):
-    # Get query parameters with defaults
-    sort_by = request.GET.get('sort', 'due_date')
-    filter_status = request.GET.get('status', '')
-    filter_priority = request.GET.get('priority', '')
-
-    # Start with all tasks
-    tasks = Task.objects.all()
-
-    # Apply filtering
-    if filter_status:
-        tasks = tasks.filter(status=filter_status)
-    if filter_priority:
-        tasks = tasks.filter(priority=filter_priority)
-
-    # Apply sorting
-    if sort_by == 'priority':
-        # Custom ordering: High first, then Medium, then Low
-        tasks = tasks.annotate(
-            priority_order=Case(
-                When(priority='High', then=Value(1)),
-                When(priority='Medium', then=Value(2)),
-                When(priority='Low', then=Value(3)),
-                default=Value(4),
-                output_field=IntegerField()
-            )
-        ).order_by('priority_order')
-    else:
-        tasks = tasks.order_by(sort_by)
-    
-    # Debug: Print the sorted tasks order to the console (visible in server logs)
-    for task in tasks:
-        print(f"Task: {task.title} | Due: {task.due_date} | Status: {task.status} | Priority: {task.priority}")
-
+    # Retrieve all tasks and sort them by due_date (ascending)
+    tasks = Task.objects.all().order_by('due_date')
     return render(request, 'todo/task_list.html', {'tasks': tasks})
 
 def summary_view(request):
