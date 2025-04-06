@@ -1,0 +1,54 @@
+{% extends 'todo/base.html' %}
+{% load dict_extras %}
+
+{% block title %}Summary{% endblock %}
+
+{% block content %}
+<h1>Summary</h1>
+
+<h2>Tasks by Due Date</h2>
+{% if pivot_by_day_data and pivot_by_day_columns %}
+  <table border="1" cellspacing="0" cellpadding="5">
+    <thead>
+      <tr>
+        {% for col in pivot_by_day_columns %}
+          <th>{{ col|title }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in pivot_by_day_data %}
+        <tr>
+          {% for col in pivot_by_day_columns %}
+            <td>{{ row|get_item:col }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No data available.</p>
+{% endif %}
+
+<h2>Tasks by Status</h2>
+{% if pivot_by_status %}
+  <table border="1" cellspacing="0" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for status, count in pivot_by_status.items %}
+        <tr>
+          <td>{{ status }}</td>
+          <td>{{ count }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No data available.</p>
+{% endif %}
+{% endblock %}
