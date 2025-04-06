@@ -1,6 +1,9 @@
 # Django To‑Do List Application
 
 This is a Django-based web application for managing a To‑Do List. Users can create, view, update, and delete tasks with fields such as title, description, due date, status, category, and priority. The application includes a dashboard with a task summary, a calendar view for tasks using FullCalendar, and a pie chart (via Chart.js) that shows the proportion of completed vs. pending tasks.
+## Live URL
+
+https://todo-project-uakq.onrender.com/
 
 ## Features
 
