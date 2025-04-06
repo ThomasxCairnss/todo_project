@@ -41,12 +41,6 @@ https://todo-project-uakq.onrender.com/
    pip install -r requirements.txt
    ```
 
-4. **Apply Migrations:**
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
-
 ### Running With Docker
 
 1. **Build and Start the Containers:**
