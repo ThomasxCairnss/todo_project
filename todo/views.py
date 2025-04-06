@@ -31,7 +31,7 @@ def calendar_view(request):
     return render(request, 'todo/calendar.html', context)
 
 def task_list(request):
-    # Retrieve all tasks and sort them by due_date (ascending)
+    # Retrieve all tasks and sort them by due date (ascending)
     tasks = Task.objects.all().order_by('due_date')
     return render(request, 'todo/task_list.html', {'tasks': tasks})
 
@@ -120,23 +120,20 @@ def export_tasks_csv(request):
 
 
 def dashboard(request):
-    # Get task data and use Pandas to generate summary statistics
-    tasks = Task.objects.all().values('status', 'due_date')
-    df = pd.DataFrame(list(tasks))
-    if not df.empty:
-        # Count tasks by status using Pandas
-        status_summary = df['status'].value_counts().to_dict()
-    else:
-        status_summary = {}
-    
     total_tasks = Task.objects.count()
     completed_tasks = Task.objects.filter(status='Completed').count()
     pending_tasks = Task.objects.filter(status='Pending').count()
+    
+    # Example summary, adjust as needed
+    summary = {
+        'Completed': completed_tasks,
+        'Pending': pending_tasks,
+    }
     
     context = {
         'total_tasks': total_tasks,
         'completed_tasks': completed_tasks,
         'pending_tasks': pending_tasks,
-        'summary': status_summary,
+        'summary': summary,
     }
     return render(request, 'todo/dashboard.html', context)
