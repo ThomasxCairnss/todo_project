@@ -15,10 +15,10 @@ This Django-based application is a to‑do list manager that lets users create, 
 ### Running Without Docker
 
 1. **Clone the Repository:**
-   ```bash
+   
    git clone https://github.com/your-username/todo_project.git
    cd todo_project
-   ```
+   
 
 2. **Create a Virtual Environment:**
    ```bash
