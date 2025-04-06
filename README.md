@@ -1,4 +1,4 @@
-```markdown
+
 # Django To‑Do List Application
 
 ## Project Overview
@@ -11,7 +11,7 @@ This Django-based application is a to‑do list manager that lets users create, 
 - Python 3.9 or later
 - Git
 - *(Optional)* Docker & docker-compose for a containerized setup
-```
+
 ### Running Without Docker
 
 1. **Clone the Repository:**
