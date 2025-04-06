@@ -13,7 +13,7 @@ https://todo-project-uakq.onrender.com/
 ### Prerequisites
 - Python 3.9 or later
 - Git
-- *(Optional)* Docker & docker-compose for a containerized setup
+- Docker
 
 ### Running Without Docker
 
