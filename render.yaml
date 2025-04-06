@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: todo-project
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    autoDeploy: true
+    branch: main
+    prPreviewEnabled: true
+    envVars:
+      - key: SECRET_KEY
+        value: o3c%F$1!$7Mhz@OZ6P*Rvq5T(2JQ!Ueg1a%1BzT8C3xN!uPz9L
+      - key: DEBUG
+        value: "False"
