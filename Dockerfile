@@ -1,21 +1,21 @@
-# Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Set environment variables to prevent Python from writing pyc files and buffering stdout/stderr
+# Prevent Python from writing .pyc files and enable unbuffered output
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set work directory
+# Set the working directory
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Copy requirements and install them
 COPY requirements.txt .
-
-# Upgrade pip and install dependencies
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy the entire project into the container
+# Copy the rest of the project
 COPY . .
 
-# Run database migrations and start the Django development server
+# Expose port 8000
+EXPOSE 8000
+
+# Use Gunicorn to serve the app, binding to the port provided by Render, or default to 8000
 CMD ["sh", "-c", "python manage.py migrate && gunicorn todo_project.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
