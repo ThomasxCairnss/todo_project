@@ -60,7 +60,7 @@ WSGI_APPLICATION = 'todo_project.wsgi.application'
 # Database configuration: uses DATABASE_URL if set, otherwise defaults to local Docker settings.
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'postgres://todo_user:your_password@db:5432/todo_db')
+        default=os.environ.get('DATABASE_URL')
     )
 }
 # Password validation

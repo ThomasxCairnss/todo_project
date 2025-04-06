@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Copy requirements and install them
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --upgrade pip --root-user-action=ignore && pip install -r requirements.txt --root-user-action=ignore
 
 # Copy the rest of the project files
 COPY . .
