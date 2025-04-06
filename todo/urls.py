@@ -10,4 +10,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('summary/', views.summary_view, name='summary'),
     path('calendar/', views.calendar_view, name='calendar'),
+    path('task/complete/<int:pk>/', views.task_complete, name='task_complete'),
+
 ]

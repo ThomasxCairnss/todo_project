@@ -5,6 +5,12 @@ import json
 from .forms import TaskForm
 import pandas as pd
 
+def task_complete(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.status = "Completed"
+    task.save()
+    return redirect('task_list')
+
 def calendar_view(request):
     tasks = Task.objects.all()
     events = []
