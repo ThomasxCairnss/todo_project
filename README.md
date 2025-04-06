@@ -56,7 +56,7 @@ https://todo-project-uakq.onrender.com/
 
 - **Assumptions:**
   - The project is built with Django 4.2 and Python 3.9+.
-  - PostgreSQL is the preferred database, configured using `dj-database-url`.
+  - PostgreSQL is the used database.
   - Users require a straightforward, visually interactive interface for managing tasks.
 
 - **Design Decisions:**
