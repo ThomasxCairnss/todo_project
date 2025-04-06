@@ -23,7 +23,7 @@ This Django-based application is a to‑do list manager that lets users create, 
 2. **Create a Virtual Environment:**
    ```bash
    python -m venv env
-   ```
+   
    - On **Windows:**
      ```bash
      env\Scripts\activate
@@ -39,10 +39,10 @@ This Django-based application is a to‑do list manager that lets users create, 
    ```
 
 4. **Apply Migrations:**
-   ```bash
+   
    python manage.py makemigrations
    python manage.py migrate
-   ```
+   
 
 ### Running With Docker
 
