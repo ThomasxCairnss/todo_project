@@ -49,7 +49,7 @@
             <a href="{% url 'task_update' task.pk %}" style="margin-right: 10px; color: #007acc; text-decoration: none;">Edit</a>
             <a href="{% url 'task_delete' task.pk %}" style="margin-right: 10px; color: #d9534f; text-decoration: none;">Delete</a>
             {% if task.status != "Completed" %}
-              <a href="{% url 'task_complete' task.pk %}" style="color: #28a745; text-decoration: none;">Mark as Completed</a>
+              <a href="{% url 'task_complete' task.pk %}" class="mark-complete" style="color: #28a745; text-decoration: none;">Mark as Completed</a>
             {% endif %}
           </div>
         </div>
@@ -59,4 +59,25 @@
     {% endfor %}
   </ul>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a.mark-complete').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();  // Prevent immediate navigation
+
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      setTimeout(function() {
+        window.location.href = link.href;
+      }, 1000);  // Adjust the delay as needed (in milliseconds)
+    });
+  });
+});
+</script>
 {% endblock %}
