@@ -9,4 +9,5 @@ urlpatterns = [
     path('export/csv/', views.export_tasks_csv, name='export_tasks_csv'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('summary/', views.summary_view, name='summary'),
+    path('calendar/', views.calendar_view, name='calendar'),
 ]

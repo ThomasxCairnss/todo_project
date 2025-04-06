@@ -1,3 +1,5 @@
+import os
+import dj_database_url
 """
 Django settings for todo_project project.
 
@@ -55,10 +57,11 @@ ROOT_URLCONF = 'todo_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'todo/templates'],
+        'DIRS': [],  # You can add global template directories here if needed.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                # default context processors...
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -68,6 +71,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'todo_project.wsgi.application'
 
 
@@ -75,14 +79,9 @@ WSGI_APPLICATION = 'todo_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todo_db',
-        'USER': 'todo_user',
-        'PASSWORD': 'your_password',
-        'HOST': 'db',  # This matches the service name in docker-compose.yml
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL', 'postgres://todo_user:your_password@db:5432/todo_db')
+    )
 }
 
 

@@ -1,26 +1,66 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Task
+import json
 from .forms import TaskForm
 import pandas as pd
 
-def task_list(request):
-    # Get query parameters for filtering and sorting
-    sort_by = request.GET.get('sort', 'due_date')  # default sort by due_date
-    filter_status = request.GET.get('status', None)
-    filter_priority = request.GET.get('priority', None)
-    
+def calendar_view(request):
     tasks = Task.objects.all()
-    
+    events = []
+    for task in tasks:
+        if task.due_date:  # only include tasks with a due date
+            # Set the color based on the task's priority
+            if task.priority.lower() == 'low':
+                color = 'green'
+            elif task.priority.lower() == 'medium':
+                color = 'yellow'
+            elif task.priority.lower() == 'high':
+                color = 'red'
+            else:
+                color = None  # default if no priority is set
+            
+            events.append({
+                'title': task.title,
+                'start': task.due_date.strftime('%Y-%m-%d'),
+                'color': color,
+            })
+    context = {
+        'events_json': json.dumps(events)
+    }
+    return render(request, 'todo/calendar.html', context)
+
+def task_list(request):
+    # Get query parameters
+    sort_by = request.GET.get('sort', 'due_date')
+    filter_status = request.GET.get('status', '')
+    filter_priority = request.GET.get('priority', '')
+
+    # Start with all tasks
+    tasks = Task.objects.all()
+
+    # Apply filtering based on status and/or priority if provided
     if filter_status:
         tasks = tasks.filter(status=filter_status)
     if filter_priority:
         tasks = tasks.filter(priority=filter_priority)
-        
-    tasks = tasks.order_by(sort_by)
-    
-    return render(request, 'todo/task_list.html', {'tasks': tasks})
 
+    # Apply sorting
+    if sort_by == 'priority':
+        # Custom sort order: High first, then Medium, then Low
+        tasks = tasks.annotate(
+            priority_order=Case(
+                When(priority='High', then=Value(1)),
+                When(priority='Medium', then=Value(2)),
+                When(priority='Low', then=Value(3)),
+                default=Value(4),
+                output_field=IntegerField()
+            )
+        ).order_by('priority_order')
+    else:
+        tasks = tasks.order_by(sort_by)
+
+    return render(request, 'todo/task_list.html', {'tasks': tasks})
 
 def summary_view(request):
     # Retrieve tasks data with due_date and status
