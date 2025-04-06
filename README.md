@@ -13,22 +13,22 @@ This Django-based application is a to‑do list manager that lets users create, 
 - *(Optional)* Docker & docker-compose for a containerized setup
 
 ### Running Without Docker
-'''
+```
 1. **Clone the Repository:**
-   
+   ```bash
    git clone https://github.com/your-username/todo_project.git
    cd todo_project
-   
+   ```
 
 2. **Create a Virtual Environment:**
    ```bash
    python -m venv env
-   
-   - On **Windows:**
+   ```
+   - **On Windows:**
      ```bash
      env\Scripts\activate
      ```
-   - On **macOS/Linux:**
+   - **On macOS/Linux:**
      ```bash
      source env/bin/activate
      ```
@@ -39,10 +39,10 @@ This Django-based application is a to‑do list manager that lets users create, 
    ```
 
 4. **Apply Migrations:**
-   
+   ```bash
    python manage.py makemigrations
    python manage.py migrate
-   
+   ```
 
 ### Running With Docker
 
@@ -63,7 +63,8 @@ This Django-based application is a to‑do list manager that lets users create, 
   - Users require a straightforward, visually interactive interface for managing tasks.
 
 - **Design Decisions:**
-  - **Containerization:** Docker and docker-compose are used to ensure a consistent environment for development and production.
+  - **Containerization:** Docker and docker-compose are used to ensure a consistent environment for both development and production.
   - **Modular Architecture:** The application is organized into separate modules for task management, calendar integration, and dashboard visualizations, improving maintainability.
-  - **Enhanced User Experience:** Integrating Chart.js and FullCalendar provides interactive visualizations and an intuitive UI.
+  - **Enhanced User Experience:** Integration of Chart.js and FullCalendar provides interactive visualizations and an intuitive UI.
   - **Easy Deployment:** The project is structured to facilitate quick deployment with clear configurations for production environments.
+```
