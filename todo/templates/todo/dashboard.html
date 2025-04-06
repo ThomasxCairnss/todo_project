@@ -49,4 +49,53 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<style>
+/* Ensure border-box sizing for all elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Dashboard container: using flex with wrap on small screens, no wrap on larger screens */
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap; /* allow stacking on small screens */
+  align-items: flex-start; /* align columns at the top */
+  gap: 20px;
+  margin: 0 auto;
+  padding: 15px;
+  width: 100%;
+}
+
+/* For mobile devices, let columns take full width */
+.dashboard-summary,
+.dashboard-chart {
+  flex: 1 1 100%;
+}
+
+/* For larger screens, force the columns to remain side by side */
+@media (min-width: 768px) {
+  .dashboard-summary,
+  .dashboard-chart {
+    flex: 1 1 48%; /* Adjust percentage as needed */
+  }
+}
+
+/* Chart container styling */
+.dashboard-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  /* Set a minimum height for the chart container */
+  min-height: 300px;
+}
+
+/* Ensure the canvas is responsive */
+.dashboard-chart canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+</style>
+
 {% endblock %}
