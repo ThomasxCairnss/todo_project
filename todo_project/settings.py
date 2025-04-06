@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-cn=sw%39qz_vls80(kqdd
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # ALLOWED_HOSTS can be a comma-separated list in the environment variable, or empty for development
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = ['todo-project-uakq.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
