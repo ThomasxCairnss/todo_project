@@ -1,17 +1,20 @@
-```markdown
+
 # Django To‑Do List Application
 
 ## Project Overview
 
-This Django-based application is a to‑do list manager that lets users create, view, update, and delete tasks. It features an interactive dashboard with a summary of tasks (including a pie chart for completed vs. pending tasks) and a calendar view (powered by FullCalendar) to track task due dates.
+This Django-based application is a to‑do list manager that lets users create, view, update, and delete tasks, as well as download CSV files of the tasks. It features an interactive dashboard with a summary of tasks (including a pie chart for completed vs. pending tasks) and a calendar view to track task due dates.
+
+## Live Website:
+https://todo-project-uakq.onrender.com/
 
 ## Installation and Local Setup
 
 ### Prerequisites
 - Python 3.9 or later
 - Git
-- *(Optional)* Docker & docker-compose for a containerized setup
-```
+- Docker
+
 ### Running Without Docker
 
 1. **Clone the Repository:**
@@ -38,12 +41,6 @@ This Django-based application is a to‑do list manager that lets users create, 
    pip install -r requirements.txt
    ```
 
-4. **Apply Migrations:**
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
-
 ### Running With Docker
 
 1. **Build and Start the Containers:**
@@ -59,7 +56,7 @@ This Django-based application is a to‑do list manager that lets users create, 
 
 - **Assumptions:**
   - The project is built with Django 4.2 and Python 3.9+.
-  - PostgreSQL is the preferred database, configured using `dj-database-url`.
+  - PostgreSQL is the used database.
   - Users require a straightforward, visually interactive interface for managing tasks.
 
 - **Design Decisions:**
